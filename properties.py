@@ -24,7 +24,7 @@ class Properties:
 class NullProperties(Properties):
 
     def __init__(self):
-        super().__init__(True, "Fyodorov.aleksej@gmail.com", 1024)
+        super().__init__(True, "Fyodorov.aleksej@gmail.com", 2048)
     def save(self):
         super().save()
 
