@@ -10,9 +10,9 @@ if __name__ == "__main__":
     # Create hookmanager
 
     hook = HookManager()
-   # window = MyWin()
+   # window = MyWin()qww
    # window.show()
-    #Create a loop to keep the application runningq12wqQQQQQ
+    #Create a loop to keep the application runningq12wqQQQQQsdasdsawqewqewzxzxczZZZ
 
     while hook.isactive():
         time.sleep(0.6)

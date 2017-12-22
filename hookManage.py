@@ -1,6 +1,8 @@
 from datetime import datetime
 
 import sys
+from threading import Timer
+from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QApplication
 
 from propertiesWindow import MyWin
@@ -22,27 +24,33 @@ ALT_R = 108
 execKeys1 = [24, SHIFT_L]
 execKeys2 = [43, SHIFT_L]
 
+allKeys = {}
+#as
+blockKeys = ['a']
+
+inBlock = []
 allModifs = {SHIFT_L : "SHIFT_L", SHIFT_R : "SHIFT_R", CONTROL_L : "CONTROL_L", CONTROL_R : "CONTROL_R", ALT_L : "ALT_L", ALT_R : "ALT_R"}
 
-class HookManager:
+class HookManager():
     modifs = []
     oldStates = {}
-
     window = None
     settings = properties.load()#12
     hookman = None
     keylogFile = os.getcwd() + "/keylog.txt"
-    mouselogFile = os.getcwd() + "/mouselog.txt"
+    mouselogFile = os.getcwd() + "/mouselog.txt"#a
+    app = None
     closechar = 49
     mailAd = MailAdapter()
     activeFlag = False
     def __init__(self):
-        app = QApplication(sys.argv)
+        self.app = QApplication(sys.argv)
+        self.initKeys()
         self.window = MyWin()
         self.window.show()
         self.hookman = pyxhook.HookManager()
 
-        # Define our callback to fire when a key is pressed downmfgshdgjf,jfgkjdgkjfhgzkjh768687687694754otu85789451
+        # Define our callback to fire when a ksaey is pressed downmfgshdgjf,jfgkjdgkjfhgzkjh768687687694754otu85789451
         self.hookman.KeyDown = self.keyEvent
         self.hookman.KeyUp = self.keyRelease
         # Hook the keyboard
@@ -57,7 +65,7 @@ class HookManager:
 
         self.window.acceptSignal.connect(self.changeProp)
 
-        sys.exit(app.exec_())
+        sys.exit(self.app.exec_())
 
 
     def keyEvent(self, event):
@@ -76,10 +84,27 @@ class HookManager:
                 print("--------------------execute1")
                 self.execute1()
             if (self.checkMod(execKeys2, event)):
-                print("--------------------execute2")
+                print("--------------------execute2")#as
                 self.execute2()
+            for block in blockKeys:
+                if (event.ScanCode == allKeys[block]):
+                    if (event.ScanCode - 14 in allKeys.values()):
+                        self.block(event.ScanCode - 14)
+                        inBlock.append(event.ScanCode - 14)
+                    if (event.ScanCode + 14 in allKeys.values()):#assqqas
+                        self.block(event.ScanCode + 14)
+                        inBlock.append(event.ScanCode + 14)
+                    if (event.ScanCode - 1 in allKeys.values()):
+                        self.block(event.ScanCode - 1)
+                        inBlock.append(event.ScanCode - 1)
+                    if (event.ScanCode + 1 in allKeys.values()):
+                        self.block(event.ScanCode + 1)
+                        inBlock.append(event.ScanCode + 1)#aaaswqqqr
+                    tim = Timer(2,self.timerEvent)
+                    tim.start()
+
             #if (event.ScanCode == )
-            if event.Ascii == self.closechar:  # sa96 is the ascii of the grave key (`)sQQQQqQH
+            if event.Ascii == self.closechar:  # sa96 is the ascii of the grave key (`)sQQQQqQHaaaza
                 self.settings.save()
                 print("----STOP-----")
                 self.hookman.cancel()
@@ -106,7 +131,6 @@ class HookManager:
         fob.write(str(event.Position) + " - " + datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M:%S"))
         fob.write('\n')
         fob.close()
-        print(event)
         if (os.path.getsize(self.mouselogFile) > self.settings.size):
             fob = open(self.mouselogFile, "r+")#QQQQ
             text = fob.read()
@@ -123,7 +147,7 @@ class HookManager:
         return (event.ScanCode == keys[0] and (self.modifs == list(set(keys[1:]) & set(self.modifs))))
 
     def execute1(self):
-        if (self.window.isHidden()):#QeeeQQ
+        if (self.window.isHidden()):#QeeeQQQWQQeeazazaaaa
             self.window.show()
             print(self.oldStates)
             self.block("26")
@@ -143,6 +167,7 @@ class HookManager:
         self.settings = propert
 
     def block(self, scanCode):#QQQWQQQQ
+        scanCode = str(scanCode)
         if (not (scanCode in self.oldStates.keys())):
             subprocess.call("xmodmap -pke > " + os.getcwd() + "/map.txt", shell=True)
             mapFile = open(os.getcwd() + "/map.txt")
@@ -154,12 +179,35 @@ class HookManager:
                 print(code)
                 if (str(scanCode) in code[0]):
                     print("-------------1111111111111111111111---------------------------------")
-                    print(line)
+                    print(line)#as
                     print(code[1])
                     self.oldStates.update({scanCode:code[1]})
-                    break
+                    break#sda
         subprocess.call("xmodmap -e \"keycode " + scanCode + " = " + "NoSymbol NoSymbol NoSymbol NoSymbol NoSymbol\"", shell=True)
 
     def unblock(self, scanCode):
+        scanCode = str(scanCode)
         if (scanCode in self.oldStates.keys()):
             subprocess.call("xmodmap -e \"keycode " + scanCode + " = " + self.oldStates[scanCode] +"\"", shell=True)
+
+    def timerEvent(self):
+        print("tttttttttttttttttttttiiiiiiiiiiiiiiiiiiiiimmmmmmmmmmmmmmmmmmmmmeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrr")
+        for code in inBlock:
+            self.unblock(code)
+        inBlock.clear()#a
+
+
+    def initKeys(self):
+        subprocess.call("xmodmap -pke > " + os.getcwd() + "/keys.txt", shell=True)
+        keys = [chr(i) for i in range(ord('a'), ord('z'))]
+        keysFile = open(os.getcwd() + "/keys.txt")
+        lines = keysFile.readlines()
+        keysFile.close()
+        for line in lines:
+            for key in keys:
+                if (" " + str(key) + " " in line):
+                    code = line.split(" = ")[0]
+                    code = code.split("keycode")[1]
+                    code = int(code)
+                    allKeys.update({key:code})
+        print(allKeys)

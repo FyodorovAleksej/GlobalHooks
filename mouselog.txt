@@ -1,6 +1,14 @@
-mouse left  down pos(871, 260) - 22.12.2017 18:03:22
-mouse left  down pos(1213, 111) - 22.12.2017 18:03:31
-mouse left  down pos(1213, 111) - 22.12.2017 18:03:31
-mouse left  down pos(899, 255) - 22.12.2017 18:03:42
-mouse left  down pos(1218, 103) - 22.12.2017 18:03:50
-mouse left  down pos(1218, 103) - 22.12.2017 18:03:51
+mouse 6  down pos(538, 682) - 22.12.2017 23:24:38
+mouse wheel down  down pos(538, 682) - 22.12.2017 23:24:38
+mouse wheel down  down pos(538, 682) - 22.12.2017 23:24:38
+mouse 6  down pos(538, 682) - 22.12.2017 23:24:38
+mouse wheel down  down pos(538, 682) - 22.12.2017 23:24:38
+mouse wheel down  down pos(538, 682) - 22.12.2017 23:24:38
+mouse 6  down pos(538, 682) - 22.12.2017 23:24:38
+mouse wheel down  down pos(538, 682) - 22.12.2017 23:24:38
+mouse left  down pos(1216, 106) - 22.12.2017 23:24:40
+mouse left  down pos(1216, 106) - 22.12.2017 23:24:41
+mouse left  down pos(997, 406) - 22.12.2017 23:25:11
+mouse left  down pos(997, 399) - 22.12.2017 23:25:12
+mouse left  down pos(1210, 110) - 22.12.2017 23:25:34
+mouse left  down pos(1210, 110) - 22.12.2017 23:25:34
