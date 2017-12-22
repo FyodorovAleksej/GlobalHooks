@@ -1,0 +1,6 @@
+mouse left  down pos(871, 260) - 22.12.2017 18:03:22
+mouse left  down pos(1213, 111) - 22.12.2017 18:03:31
+mouse left  down pos(1213, 111) - 22.12.2017 18:03:31
+mouse left  down pos(899, 255) - 22.12.2017 18:03:42
+mouse left  down pos(1218, 103) - 22.12.2017 18:03:50
+mouse left  down pos(1218, 103) - 22.12.2017 18:03:51

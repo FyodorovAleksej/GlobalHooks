@@ -40,11 +40,23 @@ class MyWin(QtWidgets.QMainWindow):
         #tray_menu.addAction(quit_action)
         #self.tray_icon.setContextMenu(tray_menu)
         #self.tray_icon.show()
-        #self.hide()
+        #self.hide()QQQ
 
     def accept(self):
         cur = properties.Properties(self.ui.modeCheckBox.isChecked(), self.ui.mailLineEdit.text(), self.ui.sizeSpinBox.value())
         self.acceptSignal.emit(cur)
+        self.curProp = cur
+        self.refresh()
+        self.hide()
 
     def canceled(self):
         self.hide()
+
+    def refresh(self):
+        self.ui.sizeSpinBox.setValue(self.curProp.size)
+        self.ui.mailLineEdit.setText(self.curProp.address)
+        self.ui.modeCheckBox.setChecked(self.curProp.silenceMode)
+
+    def closeEvent(self, QCloseEvent):
+        QCloseEvent.ignore()
+        self.hide()#QQQQ

@@ -16,9 +16,12 @@ class MailAdapter:
         body = message
         msg.attach(MIMEText(body, 'plain'))
 
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login(self.fromaddr, self.mypass)
-        text = msg.as_string()
-        server.sendmail(self.fromaddr, address, text)
-        server.quit()
+        try:
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(self.fromaddr, self.mypass)
+            text = msg.as_string()
+            server.sendmail(self.fromaddr, address, text)
+            server.quit()
+        except Exception:
+            print("None of connection")
